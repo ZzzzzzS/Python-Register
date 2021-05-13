@@ -2,7 +2,7 @@
  * @Author: 周子顺
  * @Date: 2021-05-13 17:35:04
  * @LastEditors: 周子顺
- * @LastEditTime: 2021-05-13 18:00:42
+ * @LastEditTime: 2021-05-13 18:08:17
 -->
 
 # 软件注册信息生成器
@@ -21,14 +21,15 @@
 
 ## Linux端标识符
 
-    ```bash
-    cat /var/lib/dbus/machine-id # 不需要root权限
+```bash
+cat /var/lib/dbus/machine-id # 不需要root权限
 
-    cat /sys/class/dmi/id/board_serial #需要root权限
-    cat /sys/class/dmi/id/product_uuid
-    ```
+cat /sys/class/dmi/id/board_serial #需要root权限
+cat /sys/class/dmi/id/product_uuid
+```
 
 ## Windows端标识符
-    ```cmd
-    wmic csproduct get UUID #不需要管理员权限
-    ```
+
+```powershell
+wmic csproduct get UUID #不需要管理员权限
+```
