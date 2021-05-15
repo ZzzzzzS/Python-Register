@@ -2,12 +2,58 @@
  * @Author: 周子顺
  * @Date: 2021-05-13 17:35:04
  * @LastEditors: 周子顺
- * @LastEditTime: 2021-05-13 18:08:17
+ * @LastEditTime: 2021-05-15 20:11:12
 -->
 
 # 软件注册信息生成器
 
 > 最近一个项目由于需要防止在多台电脑上使用，也为了防止用户无限期使用，于是简单做了一个注册器。由于用户电脑不能联网，因此就不能做联网验证，所以其实用户也很容易破解。
+
+# 使用说明
+
+* 使用前请使用``pip install pycryptodome``命令按照软件包
+* 使用**DecryptModule.py**模块进行解密运算，该模块运行在用户的计算机中。
+* 使用**EncryptModule.py** 进行加密运算，该模块仅需运行在LICENSE管理员的计算机中。
+
+
+## LICENSE签发过程
+
+* 首先生成加密解密用的密钥对，命令如下：
+
+```bash
+python3 ./EncryptModule.py -k LICENSE
+
+#将得到 LICENSE-Decrypt.key 和 LICENSE-Encrypy.key 两个文件，分别用于解密和加密
+```
+
+* 第二步根据用户机器的唯一识别码，过期时间，和加密密钥产生LICENSE文件，命令如下：
+
+```bash
+python ./EncryptModule.py -g 
+
+Input Private Key File Name:
+LICENSE-Encrypt.key # 输入加密密钥的完整名称
+
+Input Fingerprint Name: # 输入用户提供的设备ID（解密模块找不到密钥时会自动提供）
+123456
+
+Input ExpireTime (e.g. 2021/07/07): # 输入期望的过期时间，格式为yyyy/mm/DD
+2021/07/07
+
+```
+
+* 第三步，将生成的``LICENSE.txt``和``LICENSE-Decrypt.key``发送给用户，放在软件的同级文件夹下
+
+## LICENSE校验过程
+
+**使用DecryptModule中的LicenseChecker类来判断LICENSE是否有效**
+
+例程如下：
+
+```Python
+    a = LicenseChecker("LICENSE.txt", "key-Decrypt.key")
+    print(a.CheckLicenseAvailable())
+```
 
 # 基本原理
 

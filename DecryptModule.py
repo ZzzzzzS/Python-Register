@@ -2,7 +2,7 @@
 Author: 周子顺
 Date: 2021-05-13 11:25:32
 LastEditors: 周子顺
-LastEditTime: 2021-05-13 17:11:32
+LastEditTime: 2021-05-15 20:05:43
 '''
 
 from Crypto.PublicKey import RSA
@@ -14,6 +14,14 @@ import os
 
 
 class LicenseChecker:
+    '''
+    @description: 初始化LicenseChecker
+    @param {*} self
+    @param {str} LicenseFileName License的文件名
+    @param {str} DecryptKey Key的文件名
+    @return {*}
+    '''
+
     def __init__(self, LicenseFileName: str, DecryptKey: str) -> None:
         self.LicenseFile = self.__LoadLicenseFile(LicenseFileName)
 
@@ -25,6 +33,12 @@ class LicenseChecker:
             print("Can't open key file")
             self.__ErrorInfo()
             self.key = []
+
+    '''
+    @description: 检查License是否有效
+    @param {*} self
+    @return {*}
+    '''
 
     def CheckLicenseAvailable(self) -> bool:
 
